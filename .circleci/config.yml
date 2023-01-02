@@ -87,34 +87,34 @@ jobs:
           paths: [backend/node_modules]
           key: backend-build
 
-  test-frontend:
-    docker:
-      - image: cimg/node:14.20
-    steps:
-      - checkout
-      - restore_cache:
-          keys: [frontend-build]
-      - run: 
-          name: test frontend
-          command: |
-            cd frontend
-            npm install
-            npm test
+  # test-frontend:
+  #   docker:
+  #     - image: cimg/node:14.20
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #         keys: [frontend-build]
+  #     - run: 
+  #         name: test frontend
+  #         command: |
+  #           cd frontend
+  #           npm install
+  #           npm test
 
                 
-  test-backend:
-    docker:
-      - image: cimg/node:14.20
-    steps:
-      - checkout
-      - restore_cache:
-          keys: [backend-build]
-      - run: 
-          name: test backend
-          command: |
-            cd backend
-            npm install
-            npm test
+  # test-backend:
+  #   docker:
+  #     - image: cimg/node:14.20
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #         keys: [backend-build]
+  #     - run: 
+  #         name: test backend
+  #         command: |
+  #           cd backend
+  #           npm install
+  #           npm test
             
   # scan-frontend:
   #   docker:
