@@ -252,7 +252,7 @@ jobs:
           command: |
             cd backend
             npm install
-            npm run migrations 
+            npm run migrations --loglevel verbose
       - run:
           name: Send migration results to kvdb
           command: |
