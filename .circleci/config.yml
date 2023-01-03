@@ -262,7 +262,7 @@ jobs:
             fi
 
       - destroy-environment
-      - revert_migration       
+      - revert-migration       
  
 
 #   deploy-frontend:
