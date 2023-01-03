@@ -1,11 +1,5 @@
 ---
 
-- name: "install_node_js_14 and pm2"
-  shell: |
-    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-    sudo apt install -y nodejs
-    sudo npm install pm2 -g
-
 - name: "create backend app directory"
   file:
     path: ~/backend-app
