@@ -284,20 +284,41 @@ jobs:
                     
   deploy-backend:
     docker:
-      # Docker image here that supports Ansible
+      - image: cimg/base:stable
     steps:
-      # Checkout code from git
-      # Add ssh keys with fingerprint
-      # attach workspace
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "c8:87:13:8a:6d:b3:52:27:5c:93:f6:73:f0:45:33:f0"
+      - attach_workspace:
+          at: ~/
+      - restore_cache:
+          keys: [backend-build]
       - run:
           name: Install dependencies
           command: |
-            # your code here
+            cd backend
+            npm install
+      - run:
+          name: Packaging Backend
+          command: |
+            cd backend
+            npm run build
+            tar -czf artifact.tar.gz dist/* package*
+            cd ..
+            cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
       - run:
           name: Deploy backend
           command: |
-            # your code here
-      # Here's where you will add some code to rollback on failure  
+            export TYPEORM_MIGRATIONS_DIR=./migrations
+            TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts, .js}
+            TYPEORM_MIGRATIONS=./migrations/*.ts
+            cd .circleci/ansible
+            cat inventory.txt
+            ansible-playbook -i inventory.txt
+            
+      - destroy-environment
+      - revert-migrations        
 
 #   smoke-test:
 #     docker:
