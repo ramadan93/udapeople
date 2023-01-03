@@ -251,6 +251,7 @@ jobs:
           name: Run migrations
           command: |
             cd backend
+            touch migrations_dump.txt
             npm install
             npm run migrations --loglevel verbose >> migrations_dump.txt
             echo "dump here"
