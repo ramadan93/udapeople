@@ -56,13 +56,17 @@ commands:
               when: on_fail
               command: |
                 SUCCESS=$(curl --insecure  https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7} )
-                if(( $SUCCESS==1 )); 
+                if ["$SUCCESS" != "Not Found" ];
                 then
-                  cd ~/project/backend
-                  npm install
-                  npm run migration:revert
+                  if(( $SUCCESS==1 )); 
+                  then
+                    cd ~/project/backend
+                    npm install
+                    npm run migration:revert
+                  fi
                 fi
-            
+
+
 jobs:
   build-frontend:
     docker:
@@ -315,7 +319,7 @@ jobs:
           command: |
             export TYPEORM_MIGRATIONS_DIR=./migrations
             export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
-            export TYPEORM_MIGRATIONS=./migrations/*.ts
+            export TYPEORM_MIGRATIONS=./migrations/*.js
             cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
