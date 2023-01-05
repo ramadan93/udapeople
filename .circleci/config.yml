@@ -28,7 +28,6 @@ commands:
             command: |
               curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
               sudo apt install -y nodejs
-              nvm install 13.8.0
 
     destroy-environment:
         description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
