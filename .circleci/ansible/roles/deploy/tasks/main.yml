@@ -14,6 +14,9 @@
   shell: |
     cd ~/backend-app
     npm i
+    npm install -D ts-node
+    npm install -D typescript
+
 
 - name: "execute node app with pm2"
   shell: |
