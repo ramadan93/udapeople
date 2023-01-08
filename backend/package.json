@@ -32,8 +32,6 @@
     "update:domain": "npm update @kiwihr/kiwi-domain"
   },
   "dependencies": {
-    "ts-node": "^10.8.1",
-    "typescript": "^4.6.3",
     "@hapi/joi": "^17.1.1",
     "@nestjs/common": "^6.11.11",
     "@nestjs/core": "^6.11.11",
@@ -60,6 +58,7 @@
     "passport-auth0": "^1.3.2",
     "passport-jwt": "^4.0.0",
     "pg": "^7.9.0",
+    "pm2": "^5.2.2",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.5.4",
     "swagger-ui-express": "^4.1.4",
@@ -83,10 +82,10 @@
     "supertest": "^3.4.2",
     "ts-jest": "^24.3.0",
     "ts-loader": "^4.4.2",
-    "ts-node": "^10.8.1",
+    "ts-node": "^10.9.1",
     "tsconfig-paths": "^3.9.0",
     "tslint": "5.11.0",
-    "typescript": "^4.6.3",
+    "typescript": "^4.9.4",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-node-externals": "^1.7.2"
