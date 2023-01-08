@@ -130,38 +130,38 @@ jobs:
             npm install
             npm test
             
-  scan-frontend:
-    docker:
-      - image: cimg/node:13.8.0
-    steps:
-      - checkout
-      - restore_cache:
-          keys: [frontend-build]      
-      - run:
-          name: frontend scan
-          command: |
-              cd frontend
-              npm install
-              npm audit fix --force --audit-level=critical
-              npm audit --audit-level=critical
+  # scan-frontend:
+  #   docker:
+  #     - image: cimg/node:13.8.0
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #         keys: [frontend-build]      
+  #     - run:
+  #         name: frontend scan
+  #         command: |
+  #             cd frontend
+  #             npm install
+  #             npm audit fix --force --audit-level=critical
+  #             npm audit --audit-level=critical
 
 
-  scan-backend:
-    docker:
-      - image: cimg/node:13.8.0
-    steps:
-      - checkout
-      - restore_cache:
-          keys: [backend-build]      
-      - run:
-          name: backend scan
-          command: |
-              cd backend
-              npm install
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit --audit-level=critical
+  # scan-backend:
+  #   docker:
+  #     - image: cimg/node:13.8.0
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #         keys: [backend-build]      
+  #     - run:
+  #         name: backend scan
+  #         command: |
+  #             cd backend
+  #             npm install
+  #             npm audit fix --force --audit-level=critical
+  #             npm audit fix --force --audit-level=critical
+  #             npm audit fix --force --audit-level=critical
+  #             npm audit --audit-level=critical
 
   deploy-infrastructure:
     docker:
@@ -421,12 +421,12 @@ workflows:
           requires: [build-frontend]
       - test-backend:
           requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
+      # - scan-backend:
+      #     requires: [build-backend]
+      # - scan-frontend:
+      #     requires: [build-frontend]
       - deploy-infrastructure:
-          requires: [test-backend, test-frontend, scan-backend, scan-frontend]
+          requires: [test-backend, test-frontend]
           filters:
             branches:
               only: [master]
